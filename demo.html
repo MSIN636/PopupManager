@@ -5,7 +5,7 @@
     <title>Popup Demo Page</title>
     <link type="text/css" rel="Stylesheet" href="main.css" />
     <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
-    <script type="text/javascript" src="popup.js"></script>
+    <script type="text/javascript" src="PopupManager.js"></script>
     <style type="text/css">
     .box
     {
@@ -57,7 +57,14 @@
 </div>
 <script type="text/javascript">
     $(function () {
-        var popup = new PopupManager();
+        var popup = new PopupManager({
+            beforeShow: function () {
+                console.log('popup opening');
+            },
+            afterClose: function () {
+                console.log('popup closed');
+            }
+        });
         $('.ShowDemo').click(function () {
             popup.show();
         });

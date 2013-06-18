@@ -3,7 +3,9 @@ function PopupManager(options) {
         maskClass: 'popup-mask',
         popupClass: 'popup',
         fadeInTime: 300,
-        reposition: true
+        reposition: true,
+        beforeShow: function () { },
+        afterClose: function () { }
     };
 
     if (options) {
@@ -31,6 +33,7 @@ function PopupManager(options) {
     };
 
     PopupManager.prototype.show = function () {
+        settings.beforeShow();
         setPosition();
         mask.fadeIn(settings.fadeInTime, function () {
             popup.show();
@@ -40,6 +43,7 @@ function PopupManager(options) {
     PopupManager.prototype.close = function () {
         popup.hide();
         mask.hide();
+        settings.afterClose();
     };
 
     $(window).bind('resize', function () {
